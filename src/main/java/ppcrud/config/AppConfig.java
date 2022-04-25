@@ -25,6 +25,7 @@ import java.util.Properties;
 public class AppConfig {
 
     private final Environment env;
+
     @Autowired
     public AppConfig(Environment env) {
         this.env = env;
@@ -65,6 +66,7 @@ public class AppConfig {
 
     Properties additionalProperties() {
         Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         return properties;

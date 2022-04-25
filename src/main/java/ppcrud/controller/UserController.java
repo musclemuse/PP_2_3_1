@@ -26,16 +26,6 @@ public class UserController {
         return "index";
     }
 
-    //    @PostMapping
-//    public String createUser(@ModelAttribute("user") User user) {
-//        userService.add(user);
-//        return "redirect: /index";
-//    }
-//
-//    @GetMapping("add")
-//    public String createUserForm(@ModelAttribute("user") User user) {
-//        return "add";
-//    }
     @RequestMapping(value = "addNewUser")
     public String addNewUser(Model model) {
         User user = new User();
@@ -47,12 +37,25 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user) {
         userService.add(user);
         return "redirect:/index";
+
     }
+
     @RequestMapping(value = "updateInfo")
     public String updateUser(@RequestParam("id") int id, Model model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-    return "user-info";
+        return "user-update";
+    }
 
+    @RequestMapping(value = "updateUser")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.update(user);
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "deleteUser")
+    public String deleteUser(@RequestParam("id") int id) {
+        userService.removeUserById(id);
+        return "redirect:/index";
     }
 }

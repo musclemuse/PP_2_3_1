@@ -5,53 +5,48 @@
     <meta charset="UTF-8">
     <title>Users</title>
     <style>
-        table th, table td {padding: 5px;}
+        table th, table td {
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
 
 <div>
-    <div th:switch="${users}">
-        <h2 th:case="null">No users found!</h2>
-        <div th:case="*">
-            <h2>Users</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Profession</th>
-                    <th>Age</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.getId()}"></td>
-                    <td th:text="${user.getName()}"></td>
-                    <td th:text="${user.getProfession()}"></td>
-                    <td th:text="${user.getAge()}"></td>
-                    <td>
-                        <form th:action="@{updateInfo(id=${user.id})}" th:object="${user}">
-                            <input type="hidden" name="id" th:value="${user.id}">
-                            <button type="submit">Edit</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{users/delete(id=${user.id})}" th:object="${user}">
-                            <input type="hidden" name="id" th:value="${user.id}">
-                            <button type="submit">Удалить</button>
-                        </form>
+    <h2>Users</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Profession</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getProfession()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td>
+                <form th:action="@{updateInfo(id=${user.id})}" th:object="${user}">
+                    <!--                            Скрытое поле id-->
+                    <input type="hidden" name="id" th:value="${user.getId()}">
+                    <button type="submit">Edit</button>
+                </form>
 
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                <form th:action="@{deleteUser(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <p><a href="addNewUser">Create user</a></p>
-
-
-</div>
 </div>
 </body>
 </html>

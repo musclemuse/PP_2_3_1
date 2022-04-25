@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
 
-
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
@@ -29,17 +28,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void removeUserById(long id) {
-
+        userDao.removeUserById(id);
     }
 
     @Transactional
     @Override
     public void update(User user) {
-    userDao.update(user);
+        userDao.update(user);
     }
 
     @Override
-    @javax.transaction.Transactional
+    @Transactional
     public User getUserById(long id) {
         return userDao.getUserById(id);
     }

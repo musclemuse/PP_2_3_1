@@ -5,11 +5,13 @@ import ppcrud.model.User;
 import java.util.List;
 
 public interface UserDao {
-       void add(User user);
-        void removeUserById (long id);
-        void update (User user);
+    void add(User user);
 
-        List<User> listOfAllUsers();
+    void removeUserById(long id);
 
-   public User getUserById(long id);
+    void update(User user);
+
+    List<User> listOfAllUsers();
+
+    public User getUserById(long id);
 }
